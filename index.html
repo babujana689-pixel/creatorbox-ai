@@ -148,23 +148,7 @@
       <p>ভিডিও প্লে করে দেখুন এবং নিচের বাটনে ক্লিক করে গ্যালারিতে সেভ করুন।</p>
     </div>
 
-    <div class="video-grid">
-      <div class="video-card">
-        <video controls playsinline preload="metadata">
-          <source src="https://res.cloudinary.com/kowmnsjp/video/upload/lv_0_20261108085830.mp4" type="video/mp4">
-        </video>
-        <div class="video-title">CreatorBox Special 01</div>
-        <a class="dl-btn" href="https://res.cloudinary.com/kowmnsjp/video/upload/fl_attachment/lv_0_20261108085830.mp4" download="CreatorBox_Video_1.mp4">⬇️ ডাউনলোড করুন</a>
-      </div>
-
-      <div class="video-card">
-        <video controls playsinline preload="metadata">
-          <source src="https://res.cloudinary.com/kowmnsjp/video/upload/lv_0_20261108085830.mp4" type="video/mp4">
-        </video>
-        <div class="video-title">Trending Reel Loop</div>
-        <a class="dl-btn" href="https://res.cloudinary.com/kowmnsjp/video/upload/fl_attachment/lv_0_20261108085830.mp4" download="CreatorBox_Video_2.mp4">⬇️ ডাউনলোড করুন</a>
-      </div>
-    </div>
+    <div id="videoGrid" class="video-grid"></div>
   </div>
 
   <!-- 2. Voice Script Section -->
@@ -214,6 +198,54 @@
   </div>
 
   <script>
+    const videoList = [
+      "https://res.cloudinary.com/kowmnsjp/video/upload/lv_0_20261108085830.mp4",
+      "https://res.cloudinary.com/kowmnsjp/video/upload/From_Klickpin.com-_Bright_home_ideas_that_bring_color_comfort_and_meaning_for_modern_homes_that_feel_easy_to_keep_up-pin-id-1144195849118834953.mp4",
+      "https://res.cloudinary.com/kowmnsjp/video/upload/From_Klickpin.com-_Bright_home_ideas_that_bring_color_comfort_and_meaning_for_modern_homes_that_feel_easy_to_keep_up-pin-id-1144195849119340811.mp4",
+      "https://res.cloudinary.com/kowmnsjp/video/upload/From_Klickpin.com-_Bright_home_ideas_that_bring_color_comfort_and_meaning_for_modern_homes_that_feel_easy_to_keep_up-pin-id-1104578246141389877.mp4",
+      "https://res.cloudinary.com/kowmnsjp/video/upload/From_Klickpin.com-_Bright_home_ideas_that_bring_color_comfort_and_meaning_for_modern_homes_that_feel_easy_to_keep_up-pin-id-1136244180996777852.mp4",
+      "https://res.cloudinary.com/kowmnsjp/video/upload/v1795330088/From_Klickpin.com-_Bright_home_ideas_that_bring_color_comfort_and_meaning_for_modern_homes_that_feel_easy_to_keep_up-pin-id-1105422671074843629.mp4",
+      "https://res.cloudinary.com/kowmnsjp/video/upload/v1795330115/From_Klickpin.com-_Bright_home_ideas_that_bring_color_comfort_and_meaning_for_modern_homes_that_feel_easy_to_keep_up-pin-id-1144195849120031932.mp4",
+      "https://res.cloudinary.com/kowmnsjp/video/upload/v1795330142/From_Klickpin.com-_Bright_home_ideas_that_bring_color_comfort_and_meaning_for_modern_homes_that_feel_easy_to_keep_up-pin-id-1144195849118447484.mp4",
+      "https://res.cloudinary.com/kowmnsjp/video/upload/v1795330166/From_Klickpin.com-_Bright_home_ideas_that_bring_color_comfort_and_meaning_for_modern_homes_that_feel_easy_to_keep_up-pin-id-1144195849120056288.mp4",
+      "https://res.cloudinary.com/kowmnsjp/video/upload/v1795330195/From_Klickpin.com-_Bright_home_ideas_that_bring_color_comfort_and_meaning_for_modern_homes_that_feel_easy_to_keep_up-pin-id-1144195849120056412.mp4",
+      "https://res.cloudinary.com/kowmnsjp/video/upload/v1795330221/From_Klickpin.com-_Bright_home_ideas_that_bring_color_comfort_and_meaning_for_modern_homes_that_feel_easy_to_keep_up-pin-id-1083889835366037195.mp4",
+      "https://res.cloudinary.com/kowmnsjp/video/upload/v1795330246/From_Klickpin.com-_14_Trending_Minimalist_Home_Styling_for_This_Year-pin-id-1046312925947600908.mp4",
+      "https://res.cloudinary.com/kowmnsjp/video/upload/v1795330274/From_Klickpin.com-_14_Trending_Minimalist_Home_Styling_for_This_Year-pin-id-738660776429077368.mp4",
+      "https://res.cloudinary.com/kowmnsjp/video/upload/v1795330295/From_Klickpin.com-_14_Trending_Minimalist_Home_Styling_for_This_Year-pin-id-799107527676674977.mp4",
+      "https://res.cloudinary.com/kowmnsjp/video/upload/v1795330315/From_Klickpin.com-_14_Trending_Minimalist_Home_Styling_for_This_Year-pin-id-940900547175096572_1.mp4",
+      "https://res.cloudinary.com/kowmnsjp/video/upload/v1795330342/From_Klickpin.com-_14_Trending_Minimalist_Home_Styling_for_This_Year-pin-id-799107527677006545.mp4",
+      "https://res.cloudinary.com/kowmnsjp/video/upload/v1795330380/From_Klickpin.com-_14_Trending_Minimalist_Home_Styling_for_This_Year-pin-id-1025202302700041533.mp4",
+      "https://res.cloudinary.com/kowmnsjp/video/upload/v1795330409/From_Klickpin.com-_14_Trending_Minimalist_Home_Styling_for_This_Year-pin-id-926404585871731125.mp4",
+      "https://res.cloudinary.com/kowmnsjp/video/upload/v1795330433/From_Klickpin.com-_14_Trending_Minimalist_Home_Styling_for_This_Year-pin-id-1119989001113145318.mp4",
+      "https://res.cloudinary.com/kowmnsjp/video/upload/v1795330458/From_Klickpin.com-_14_Trending_Minimalist_Home_Styling_for_This_Year-pin-id-799107527676693440.mp4",
+      "https://res.cloudinary.com/kowmnsjp/video/upload/v1795330489/From_Klickpin.com-_14_Trending_Minimalist_Home_Styling_for_This_Year-pin-id-1114289132851118988.mp4",
+      "https://res.cloudinary.com/kowmnsjp/video/upload/v1795330518/From_Klickpin.com-_14_Trending_Minimalist_Home_Styling_for_This_Year-pin-id-940900547175096565.mp4",
+      "https://res.cloudinary.com/kowmnsjp/video/upload/v1795330543/From_Klickpin.com-_14_Trending_Minimalist_Home_Styling_for_This_Year-pin-id-940900547175096567.mp4",
+      "https://res.cloudinary.com/kowmnsjp/video/upload/v1795330571/From_Klickpin.com-_14_Trending_Minimalist_Home_Styling_for_This_Year-pin-id-940900547175096571.mp4",
+      "https://res.cloudinary.com/kowmnsjp/video/upload/v1795330603/From_Klickpin.com-_Need_fresh_inspiration_Pin_these_budget-friendly_craft_project_ideas_youll_want_to_recreate_this_weekend_for_a_polished_look_th.mp4",
+      "https://res.cloudinary.com/kowmnsjp/video/upload/v1795330630/From_Klickpin.com-_53_Stunning_Spa_Night_Ideas-pin-id-799107527676671273.mp4",
+      "https://res.cloudinary.com/kowmnsjp/video/upload/v1795330664/From_Klickpin.com-_Need_fresh_inspiration_Bookmark_these_simple_pet-friendly_home_ideas_that_look_high-end_but_stay_practical_designed_to_feel_ins.mp4",
+      "https://res.cloudinary.com/kowmnsjp/video/upload/v1795330702/From_Klickpin.com-_Explore_Simple_tiny_apartment_decor_that_help_you_create_a_beautiful_result_without_overspending_for_ideas_worth_saving_right_n.mp4",
+      "https://res.cloudinary.com/kowmnsjp/video/upload/v1795330729/From_Klickpin.com-_Collect_these_20_Dreamy_summer_outfit_inspiration_that_instantly_upgrade_your_space_style_or_celebration_without_much_effort_fo.mp4"
+    ];
+
+    const grid = document.getElementById('videoGrid');
+    videoList.forEach((url, index) => {
+      const num = String(index + 1).padStart(2, '0');
+      const dlUrl = url.replace('/video/upload/', '/video/upload/fl_attachment/');
+      const card = document.createElement('div');
+      card.className = 'video-card';
+      card.innerHTML = `
+        <video controls playsinline preload="none">
+          <source src="${url}" type="video/mp4">
+        </video>
+        <div class="video-title">CreatorBox Reel #${num}</div>
+        <a class="dl-btn" href="${dlUrl}" download="CreatorBox_Reel_${num}.mp4">⬇️ ডাউনলোড করুন</a>
+      `;
+      grid.appendChild(card);
+    });
+
     function openTab(id, btn) {
       document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
