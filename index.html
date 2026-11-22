@@ -7,176 +7,40 @@
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
     body { background: #0b1120; color: #f8fafc; padding-bottom: 50px; }
-    .header {
-      background: linear-gradient(135deg, #6366f1, #ec4899);
-      padding: 22px 16px;
-      text-align: center;
-      border-bottom-left-radius: 22px;
-      border-bottom-right-radius: 22px;
-      box-shadow: 0 4px 20px rgba(236, 72, 153, 0.3);
-    }
-    .header h1 { font-size: 24px; font-weight: 800; letter-spacing: 0.5px; }
+    .header { background: linear-gradient(135deg, #6366f1, #ec4899); padding: 22px 16px; text-align: center; border-bottom-left-radius: 22px; border-bottom-right-radius: 22px; box-shadow: 0 4px 20px rgba(236, 72, 153, 0.3); }
+    .header h1 { font-size: 24px; font-weight: 800; }
     .header p { font-size: 13px; opacity: 0.92; margin-top: 4px; }
-    .tabs {
-      display: flex;
-      overflow-x: auto;
-      background: #1e293b;
-      margin: 14px 12px 10px 12px;
-      padding: 6px;
-      border-radius: 14px;
-      gap: 4px;
-      scrollbar-width: none;
-    }
+    .tabs { display: flex; overflow-x: auto; background: #1e293b; margin: 14px 12px 10px 12px; padding: 6px; border-radius: 14px; gap: 4px; scrollbar-width: none; }
     .tabs::-webkit-scrollbar { display: none; }
-    .tab-btn {
-      flex: 1;
-      white-space: nowrap;
-      background: transparent;
-      border: none;
-      color: #cbd5e1;
-      padding: 10px 10px;
-      font-size: 12px;
-      font-weight: 700;
-      border-radius: 10px;
-      cursor: pointer;
-    }
-    .tab-btn.active { background: #6366f1; color: #ffffff; box-shadow: 0 2px 8px rgba(99, 102, 241, 0.4); }
-    .ad-banner-box {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 8px auto 14px auto;
-      min-height: 50px;
-      overflow: hidden;
-    }
-    .ad-native-box {
-      margin: 16px 12px 0 12px;
-      padding: 8px;
-      background: #162033;
-      border: 1px solid #283548;
-      border-radius: 14px;
-    }
+    .tab-btn { flex: 1; white-space: nowrap; background: transparent; border: none; color: #cbd5e1; padding: 10px; font-size: 12px; font-weight: 700; border-radius: 10px; cursor: pointer; }
+    .tab-btn.active { background: #6366f1; color: #ffffff; }
+    .ad-banner-box { display: flex; justify-content: center; align-items: center; margin: 8px auto 14px auto; min-height: 50px; overflow: hidden; }
+    .ad-native-box { margin: 16px 12px 0 12px; padding: 8px; background: #162033; border: 1px solid #283548; border-radius: 14px; }
     .section { display: none; padding: 0 12px; }
     .section.active { display: block; }
-    .info-card {
-      background: #162033;
-      border: 1px solid #283548;
-      border-radius: 14px;
-      padding: 14px;
-      margin-bottom: 14px;
-    }
+    .info-card { background: #162033; border: 1px solid #283548; border-radius: 14px; padding: 14px; margin-bottom: 14px; }
     .info-card h2 { font-size: 15px; color: #38bdf8; margin-bottom: 5px; }
     .info-card p { font-size: 12px; color: #94a3b8; line-height: 1.5; }
-    
-    /* AI Studio Grid & Workspace */
     .tool-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
-    .tool-card {
-      background: #162033;
-      border: 1px solid #283548;
-      border-radius: 14px;
-      padding: 14px 10px;
-      text-align: center;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-    .tool-card.selected { border-color: #ec4899; background: #1e293b; box-shadow: 0 0 12px rgba(236, 72, 153, 0.25); }
+    .tool-card { background: #162033; border: 1px solid #283548; border-radius: 14px; padding: 14px 10px; text-align: center; cursor: pointer; }
+    .tool-card.selected { border-color: #ec4899; background: #1e293b; }
     .tool-icon { font-size: 24px; margin-bottom: 6px; }
     .tool-name { font-size: 13px; font-weight: 700; color: #f8fafc; }
     .tool-desc { font-size: 11px; color: #94a3b8; margin-top: 3px; }
-    
-    .ai-box {
-      background: #162033;
-      border: 1px solid #334155;
-      border-radius: 14px;
-      padding: 14px;
-      margin-bottom: 14px;
-    }
+    .ai-box { background: #162033; border: 1px solid #334155; border-radius: 14px; padding: 14px; margin-bottom: 14px; }
     .ai-box label { display: block; font-size: 13px; font-weight: 700; color: #38bdf8; margin-bottom: 8px; }
-    .ai-input, .ai-select {
-      width: 100%;
-      background: #0f172a;
-      border: 1px solid #334155;
-      color: #f8fafc;
-      border-radius: 10px;
-      padding: 10px;
-      font-size: 13px;
-      margin-bottom: 10px;
-    }
-    .ai-input:focus { outline: none; border-color: #6366f1; }
-    .run-btn {
-      width: 100%;
-      background: linear-gradient(135deg, #6366f1, #ec4899);
-      color: #fff;
-      border: none;
-      padding: 11px;
-      border-radius: 10px;
-      font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-    .run-btn:disabled { opacity: 0.6; cursor: not-allowed; }
-    .ai-output {
-      margin-top: 12px;
-      background: #0f172a;
-      border: 1px solid #334155;
-      border-radius: 10px;
-      padding: 12px;
-      font-size: 13px;
-      line-height: 1.6;
-      color: #e2e8f0;
-      white-space: pre-wrap;
-      display: none;
-    }
-
-    /* Reels Video Grid */
+    .ai-input, .ai-select { width: 100%; background: #0f172a; border: 1px solid #334155; color: #f8fafc; border-radius: 10px; padding: 10px; font-size: 13px; margin-bottom: 10px; }
+    .run-btn { width: 100%; background: linear-gradient(135deg, #6366f1, #ec4899); color: #fff; border: none; padding: 12px; border-radius: 10px; font-size: 14px; font-weight: 700; cursor: pointer; }
+    .ai-output { margin-top: 12px; background: #0f172a; border: 1px solid #38bdf8; border-radius: 10px; padding: 12px; font-size: 13px; line-height: 1.6; color: #e2e8f0; white-space: pre-wrap; display: none; }
     .video-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    .video-card {
-      background: #162033;
-      border: 1px solid #283548;
-      border-radius: 14px;
-      padding: 10px;
-      text-align: center;
-    }
-    .video-card video {
-      width: 100%;
-      aspect-ratio: 9 / 16;
-      border-radius: 10px;
-      background: #000;
-      object-fit: cover;
-    }
+    .video-card { background: #162033; border: 1px solid #283548; border-radius: 14px; padding: 10px; text-align: center; }
+    .video-card video { width: 100%; aspect-ratio: 9 / 16; border-radius: 10px; background: #000; object-fit: cover; }
     .video-title { font-size: 13px; font-weight: 600; margin: 8px 0; color: #e2e8f0; }
-    .dl-btn {
-      display: block;
-      width: 100%;
-      background: #ec4899;
-      color: #fff;
-      text-decoration: none;
-      padding: 8px;
-      border-radius: 8px;
-      font-size: 12px;
-      font-weight: 700;
-      border: none;
-      cursor: pointer;
-    }
-    .copy-card {
-      background: #162033;
-      border: 1px solid #283548;
-      border-radius: 12px;
-      padding: 12px;
-      margin-bottom: 12px;
-    }
+    .dl-btn { display: block; width: 100%; background: #ec4899; color: #fff; text-decoration: none; padding: 8px; border-radius: 8px; font-size: 12px; font-weight: 700; border: none; cursor: pointer; }
+    .copy-card { background: #162033; border: 1px solid #283548; border-radius: 12px; padding: 12px; margin-bottom: 12px; }
     .copy-card p { font-size: 13px; color: #e2e8f0; line-height: 1.5; margin-bottom: 10px; }
-    .copy-btn {
-      background: #3b82f6;
-      color: #fff;
-      border: none;
-      padding: 7px 14px;
-      border-radius: 8px;
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
-    }
-    canvas { max-width: 100%; border-radius: 10px; margin-top: 10px; background: repeating-conic-gradient(#1e293b 0% 25%, #0f172a 0% 50%) 50% / 16px 16px; }
+    .copy-btn { background: #3b82f6; color: #fff; border: none; padding: 8px 14px; border-radius: 8px; font-size: 12px; font-weight: 600; cursor: pointer; }
+    canvas { max-width: 100%; border-radius: 10px; margin-top: 10px; background: #1e293b; }
   </style>
 </head>
 <body>
@@ -187,28 +51,20 @@
   </div>
 
   <div class="tabs">
-    <button class="tab-btn active" onclick="openTab('ai-studio', this)">🤖 AI স্টুডিও</button>
-    <button class="tab-btn" onclick="openTab('videos', this)">🎬 রিলস (২৯)</button>
-    <button class="tab-btn" onclick="openTab('voice', this)">🎙️ ভয়েস</button>
-    <button class="tab-btn" onclick="openTab('hashtags', this)">✍️ হ্যাশট্যাগ</button>
-    <button class="tab-btn" onclick="openTab('prompts', this)">✨ প্রম্পট</button>
+    <button type="button" class="tab-btn active" onclick="openTab('ai-studio', this)">🤖 AI স্টুডিও</button>
+    <button type="button" class="tab-btn" onclick="openTab('videos', this)">🎬 রিলস (২৯)</button>
+    <button type="button" class="tab-btn" onclick="openTab('voice', this)">🎙️ ভয়েস</button>
+    <button type="button" class="tab-btn" onclick="openTab('hashtags', this)">✍️ হ্যাশট্যাগ</button>
+    <button type="button" class="tab-btn" onclick="openTab('prompts', this)">✨ প্রম্পট</button>
   </div>
 
-  <!-- Banner Ad (320x50) -->
   <div class="ad-banner-box">
     <script>
-      atOptions = {
-        'key' : '68923bbd2ac409942a17f65b47c417af',
-        'format' : 'iframe',
-        'height' : 50,
-        'width' : 320,
-        'params' : {}
-      };
+      atOptions = { 'key' : '68923bbd2ac409942a17f65b47c417af', 'format' : 'iframe', 'height' : 50, 'width' : 320, 'params' : {} };
     </script>
     <script src="https://bicea.org/22/68923bbd2ac409942a17f65b47c417af"></script>
   </div>
 
-  <!-- 1. AI Studio Section (6 Live AI Tools) -->
   <div id="ai-studio" class="section active">
     <div class="info-card">
       <h2>CreatorBox AI স্টুডিও (সম্পূর্ণ ফ্রি)</h2>
@@ -248,7 +104,6 @@
       </div>
     </div>
 
-    <!-- Text AI Workspace -->
     <div id="textAiWorkspace" class="ai-box">
       <label id="toolLabel">📈 YouTube SEO জেনারেটর — ভিডিওর বিষয় লিখুন:</label>
       <select id="langSelect" class="ai-select" style="display:none;">
@@ -257,22 +112,19 @@
         <option value="Hindi">হিন্দি (Hindi)</option>
       </select>
       <textarea id="aiPromptInput" class="ai-input" rows="3" placeholder="যেমন: কীভাবে ইউটিউব শর্টস ভাইরাল করবেন..."></textarea>
-      <button id="aiRunBtn" class="run-btn" onclick="runGeminiAI()">✨ জেনারেট করুন</button>
+      <button type="button" id="aiRunBtn" class="run-btn" onclick="runGeminiAI()">✨ জেনারেট করুন</button>
       <div id="aiResultBox" class="ai-output"></div>
-      <button id="aiCopyBtn" class="copy-btn" style="display:none; margin-top:8px;" onclick="copyText('aiResultBox', this)">📋 উত্তর কপি করুন</button>
+      <button type="button" id="aiCopyBtn" class="copy-btn" style="display:none; margin-top:8px;" onclick="copyText('aiResultBox', this)">📋 উত্তর কপি করুন</button>
     </div>
 
-    <!-- Background Remover Workspace -->
     <div id="bgWorkspace" class="ai-box" style="display:none;">
       <label>🖼️ ছবির ব্যাকগ্রাউন্ড রিমুভার (অফলাইন ও ফ্রি):</label>
       <input type="file" id="bgFileInput" accept="image/*" class="ai-input" onchange="processBgRemove(event)" />
-      <p style="font-size:11px; color:#94a3b8; margin-bottom:8px;">টিপস: একরঙা বা পরিষ্কার ব্যাকগ্রাউন্ডের ছবিতে এটি সবচেয়ে ভালো কাজ করে।</p>
       <canvas id="bgCanvas" style="display:none;"></canvas>
       <a id="bgDownloadLink" class="dl-btn" style="display:none; margin-top:10px; text-align:center;" download="CreatorBox_NoBG.png">⬇️ স্বচ্ছ (PNG) ছবি ডাউনলোড করুন</a>
     </div>
   </div>
 
-  <!-- 2. Reels Video Section (All 29 Videos Intact) -->
   <div id="videos" class="section">
     <div class="info-card">
       <h2>ট্রেন্ডিং রিলস ও স্টোরি ব্যাকগ্রাউন্ড (9:16)</h2>
@@ -281,13 +133,11 @@
     <div id="videoGrid" class="video-grid"></div>
   </div>
 
-  <!-- 3. Voice Studio Section -->
   <div id="voice" class="section">
     <div class="info-card">
       <h2>🎙️ ফ্রি AI ভয়েস ও ভাইরাল স্ক্রিপ্ট</h2>
       <p>যেকোনো লেখা পেস্ট করে ভয়েস শুনুন অথবা নিচের স্ক্রিপ্ট কপি করুন।</p>
     </div>
-
     <div class="ai-box">
       <label>লেখা থেকে ভয়েস শুনুন (Text-to-Speech):</label>
       <select id="ttsLang" class="ai-select">
@@ -295,24 +145,22 @@
         <option value="hi-IN">হিন্দি ভয়েস (Hindi)</option>
         <option value="en-IN">ইংরেজি ভয়েস (English)</option>
       </select>
-      <textarea id="ttsText" class="ai-input" rows="3" placeholder="এখানে আপনার স্ক্রিপ্ট লিখুন বা পেস্ট করুন...">আপনার রিলসে ভিউ আসছে না? আজই এই ৩টি সেটিংস অন করুন!</textarea>
+      <textarea id="ttsText" class="ai-input" rows="3" placeholder="এখানে আপনার স্ক্রিপ্ট লিখুন...">আপনার রিলসে ভিউ আসছে না? আজই এই ৩টি সেটিংস অন করুন!</textarea>
       <div style="display:flex; gap:8px;">
-        <button class="run-btn" onclick="speakText()">🔊 ভয়েস শুনুন</button>
-        <button class="copy-btn" style="background:#ef4444;" onclick="window.speechSynthesis.cancel()">⏹️ থামান</button>
+        <button type="button" class="run-btn" onclick="speakText()">🔊 ভয়েস শুনুন</button>
+        <button type="button" class="copy-btn" style="background:#ef4444;" onclick="window.speechSynthesis.cancel()">⏹️ থামান</button>
       </div>
     </div>
-
     <div class="copy-card">
       <p id="v1">আপনার রিলসে ভিউ আসছে না? আজই এই ৩টি সেটিংস অন করুন, আর দেখুন আপনার ভিডিও কীভাবে ভাইরাল হয়!</p>
-      <button class="copy-btn" onclick="copyText('v1', this)">📋 কপি করুন</button>
+      <button type="button" class="copy-btn" onclick="copyText('v1', this)">📋 কপি করুন</button>
     </div>
     <div class="copy-card">
       <p id="v2">সফল হতে চাইলে আজ থেকেই একা চলতে শিখুন, কারণ ভিড়ের মধ্যে শুধু সাহস পাওয়া যায়, পরিচয় নয়।</p>
-      <button class="copy-btn" onclick="copyText('v2', this)">📋 কপি করুন</button>
+      <button type="button" class="copy-btn" onclick="copyText('v2', this)">📋 কপি করুন</button>
     </div>
   </div>
 
-  <!-- 4. Hashtags Section -->
   <div id="hashtags" class="section">
     <div class="info-card">
       <h2>ভাইরাল বাংলা ও ইংরেজি হ্যাশট্যাগ</h2>
@@ -320,11 +168,10 @@
     </div>
     <div class="copy-card">
       <p id="h1">#reelsinstagram #viralreels #trendingnow #banglareels #explorepage #creatorindia #motivationalquotes</p>
-      <button class="copy-btn" onclick="copyText('h1', this)">📋 হ্যাশট্যাগ কপি করুন</button>
+      <button type="button" class="copy-btn" onclick="copyText('h1', this)">📋 হ্যাশট্যাগ কপি করুন</button>
     </div>
   </div>
 
-  <!-- 5. AI Prompts Section -->
   <div id="prompts" class="section">
     <div class="info-card">
       <h2>3D Cinematic AI ভিডিও প্রম্পট</h2>
@@ -332,56 +179,36 @@
     </div>
     <div class="copy-card">
       <p id="p1">3D cinematic animation, glowing golden keyhole in a dark mysterious room, volumetric light rays, ultra realistic 8k, vertical 9:16 aspect ratio, no human characters.</p>
-      <button class="copy-btn" onclick="copyText('p1', this)">📋 প্রম্পট কপি করুন</button>
+      <button type="button" class="copy-btn" onclick="copyText('p1', this)">📋 প্রম্পট কপি করুন</button>
     </div>
   </div>
 
-  <!-- Native Banner Ad -->
   <div class="ad-native-box">
     <script async="async" data-cfasync="false" src="https://bicea.org/21/158bb251919f19f9fa9f570cb73da496"></script>
     <div id="container-158bb251919f19f9fa9f570cb73da496"></div>
   </div>
 
   <script>
-    const API_URL = "https://creatorbox-ai-api.babujana689.workers.dev";
-    let currentTool = "seo";
+    var API_URL = "https://creatorbox-ai-api.babujana689.workers.dev";
+    var currentTool = "seo";
 
-    const toolConfigs = {
-      seo: {
-        label: "📈 YouTube SEO জেনারেটর — ভিডিওর বিষয় লিখুন:",
-        placeholder: "যেমন: কীভাবে ইউটিউব শর্টস ভাইরাল করবেন...",
-        prefix: "You are an expert YouTube & Instagram SEO specialist. Generate 5 catchy viral titles, a compelling SEO description, and 15 high-ranking tags in Bengali and English for this video topic: "
-      },
-      script: {
-        label: "🎬 AI স্ক্রিপ্ট রাইটার — ভিডিওর আইডিয়া লিখুন:",
-        placeholder: "যেমন: ইনস্টাগ্রাম রিলস ভিউ বাড়ানোর ৩টি গোপন সেটিংস...",
-        prefix: "Write a high-retention 30-second vertical Reels/Shorts voiceover script with a strong hook in the first 3 seconds, clear body points, and a call-to-action in Bengali for: "
-      },
-      chat: {
-        label: "💬 AI চ্যাটবট অ্যাসিস্ট্যান্ট — আপনার প্রশ্ন লিখুন:",
-        placeholder: "যেকোনো প্রশ্ন জিজ্ঞাসা করুন...",
-        prefix: "Answer clearly, helpfully, and concisely in the user's language (Bengali or English): "
-      },
-      translate: {
-        label: "🌐 AI অনুবাদক — যে লেখাটি অনুবাদ করতে চান তা লিখুন:",
-        placeholder: "এখানে বাংলা, ইংরেজি বা হিন্দি লেখা দিন...",
-        prefix: "Translate the following text naturally and accurately into "
-      },
-      code: {
-        label: "💻 AI কোডিং অ্যাসিস্ট্যান্ট — কী কোড দরকার লিখুন:",
-        placeholder: "যেমন: একটি সুন্দর ক্যালকুলেটর তৈরির HTML ও JS কোড দাও...",
-        prefix: "Provide clean, working, mobile-friendly code with brief explanation for: "
-      }
+    var toolConfigs = {
+      seo: { label: "📈 YouTube SEO জেনারেটর — ভিডিওর বিষয় লিখুন:", placeholder: "যেমন: কীভাবে ইউটিউব শর্টস ভাইরাল করবেন...", prefix: "Generate 5 viral YouTube/Reels titles, an SEO description, and 15 tags in Bengali and English for: " },
+      script: { label: "🎬 AI স্ক্রিপ্ট রাইটার — ভিডিওর আইডিয়া লিখুন:", placeholder: "যেমন: ইনস্টাগ্রাম রিলস ভিউ বাড়ানোর ৩টি গোপন সেটিংস...", prefix: "Write a 30-second viral Reels voiceover script in Bengali with hook, body, and CTA for: " },
+      chat: { label: "💬 AI চ্যাটবট অ্যাসিস্ট্যান্ট — আপনার প্রশ্ন লিখুন:", placeholder: "যেকোনো প্রশ্ন জিজ্ঞাসা করুন...", prefix: "Answer clearly and helpfully in Bengali or English: " },
+      translate: { label: "🌐 AI অনুবাদক — যে লেখাটি অনুবাদ করতে চান তা লিখুন:", placeholder: "এখানে বাংলা, ইংরেজি বা হিন্দি লেখা দিন...", prefix: "Translate accurately into " },
+      code: { label: "💻 AI কোডিং অ্যাসিস্ট্যান্ট — কী কোড দরকার লিখুন:", placeholder: "যেমন: একটি সুন্দর ক্যালকুলেটর তৈরির HTML ও JS কোড দাও...", prefix: "Write clean working code with short explanation for: " }
     };
 
     function selectTool(tool, cardEl) {
       currentTool = tool;
-      document.querySelectorAll('.tool-card').forEach(c => c.classList.remove('selected'));
+      var cards = document.querySelectorAll('.tool-card');
+      for (var i = 0; i < cards.length; i++) cards[i].classList.remove('selected');
       cardEl.classList.add('selected');
 
-      const textWorkspace = document.getElementById('textAiWorkspace');
-      const bgWorkspace = document.getElementById('bgWorkspace');
-      const langSelect = document.getElementById('langSelect');
+      var textWorkspace = document.getElementById('textAiWorkspace');
+      var bgWorkspace = document.getElementById('bgWorkspace');
+      var langSelect = document.getElementById('langSelect');
 
       if (tool === 'bgremove') {
         textWorkspace.style.display = 'none';
@@ -397,93 +224,88 @@
       }
     }
 
-    async function runGeminiAI() {
-      const userText = document.getElementById('aiPromptInput').value.trim();
-      if (!userText) return alert("দয়া করে বক্সে কিছু লিখুন!");
-
-      const btn = document.getElementById('aiRunBtn');
-      const outBox = document.getElementById('aiResultBox');
-      const copyBtn = document.getElementById('aiCopyBtn');
+    function runGeminiAI() {
+      var userText = document.getElementById('aiPromptInput').value.trim();
+      if (!userText) {
+        alert("দয়া করে বক্সে কিছু লিখুন!");
+        return;
+      }
+      var btn = document.getElementById('aiRunBtn');
+      var outBox = document.getElementById('aiResultBox');
+      var copyBtn = document.getElementById('aiCopyBtn');
 
       btn.disabled = true;
       btn.innerText = "⏳ AI তৈরি করছে, অপেক্ষা করুন...";
       outBox.style.display = "block";
-      outBox.innerText = "লোড হচ্ছে...";
+      outBox.innerText = "AI সার্ভারের সাথে যুক্ত হচ্ছে...";
       copyBtn.style.display = "none";
 
-      let finalPrompt = toolConfigs[currentTool].prefix;
+      var finalPrompt = toolConfigs[currentTool].prefix;
       if (currentTool === 'translate') {
-        const targetLang = document.getElementById('langSelect').value;
-        finalPrompt += `${targetLang}: "${userText}"`;
+        finalPrompt += document.getElementById('langSelect').value + ": " + userText;
       } else {
         finalPrompt += userText;
       }
 
-      try {
-        const res = await fetch(API_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ prompt: finalPrompt })
-        });
-        const data = await res.json();
+      fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ prompt: finalPrompt })
+      })
+      .then(function(res) { return res.json(); })
+      .then(function(data) {
         if (data.reply) {
           outBox.innerText = data.reply;
           copyBtn.style.display = "inline-block";
         } else {
-          outBox.innerText = "দুঃখিত, কোনো সমস্যা হয়েছে: " + (data.error || "আবার চেষ্টা করুন");
+          outBox.innerText = "সার্ভার এরর: " + (data.error || "আবার চেষ্টা করুন");
         }
-      } catch (err) {
-        outBox.innerText = "নেটওয়ার্ক সমস্যা! ইন্টারনেট সংযোগ পরীক্ষা করে আবার চেষ্টা করুন।";
-      } finally {
+      })
+      .catch(function(err) {
+        outBox.innerText = "কানেকশন এরর: " + err.message;
+      })
+      .finally(function() {
         btn.disabled = false;
         btn.innerText = "✨ জেনারেট করুন";
-      }
+      });
     }
 
     function processBgRemove(event) {
-      const file = event.target.files[0];
+      var file = event.target.files[0];
       if (!file) return;
-      const img = new Image();
+      var img = new Image();
       img.onload = function() {
-        const canvas = document.getElementById('bgCanvas');
-        const ctx = canvas.getContext('2d');
+        var canvas = document.getElementById('bgCanvas');
+        var ctx = canvas.getContext('2d');
         canvas.width = img.width;
         canvas.height = img.height;
         ctx.drawImage(img, 0, 0);
-
-        const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-        const data = imgData.data;
-        const r0 = data[0], g0 = data[1], b0 = data[2];
-        const tolerance = 45;
-
-        for (let i = 0; i < data.length; i += 4) {
-          const dist = Math.sqrt(
-            Math.pow(data[i] - r0, 2) +
-            Math.pow(data[i + 1] - g0, 2) +
-            Math.pow(data[i + 2] - b0, 2)
-          );
-          if (dist < tolerance) data[i + 3] = 0;
+        var imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        var d = imgData.data;
+        var r0 = d[0], g0 = d[1], b0 = d[2];
+        for (var i = 0; i < d.length; i += 4) {
+          var dist = Math.sqrt(Math.pow(d[i]-r0,2) + Math.pow(d[i+1]-g0,2) + Math.pow(d[i+2]-b0,2));
+          if (dist < 45) d[i+3] = 0;
         }
         ctx.putImageData(imgData, 0, 0);
         canvas.style.display = 'block';
-        const dlLink = document.getElementById('bgDownloadLink');
-        dlLink.href = canvas.toDataURL('image/png');
-        dlLink.style.display = 'block';
+        var dl = document.getElementById('bgDownloadLink');
+        dl.href = canvas.toDataURL('image/png');
+        dl.style.display = 'block';
       };
       img.src = URL.createObjectURL(file);
     }
 
     function speakText() {
-      const text = document.getElementById('ttsText').value.trim();
+      var text = document.getElementById('ttsText').value.trim();
       if (!text) return alert("ভয়েস শোনার জন্য কিছু লিখুন!");
       window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = document.getElementById('ttsLang').value;
-      window.speechSynthesis.speak(utterance);
+      var u = new SpeechSynthesisUtterance(text);
+      u.lang = document.getElementById('ttsLang').value;
+      window.speechSynthesis.speak(u);
     }
 
-    // All 29 Cloudinary Reels Videos
-    const videoList = [
+    var videoList = [
       "https://res.cloudinary.com/kowmnsjp/video/upload/lv_0_20261108085830.mp4",
       "https://res.cloudinary.com/kowmnsjp/video/upload/From_Klickpin.com-_Bright_home_ideas_that_bring_color_comfort_and_meaning_for_modern_homes_that_feel_easy_to_keep_up-pin-id-1144195849118834953.mp4",
       "https://res.cloudinary.com/kowmnsjp/video/upload/From_Klickpin.com-_Bright_home_ideas_that_bring_color_comfort_and_meaning_for_modern_homes_that_feel_easy_to_keep_up-pin-id-1144195849119340811.mp4",
@@ -491,4 +313,56 @@
       "https://res.cloudinary.com/kowmnsjp/video/upload/From_Klickpin.com-_Bright_home_ideas_that_bring_color_comfort_and_meaning_for_modern_homes_that_feel_easy_to_keep_up-pin-id-1136244180996777852.mp4",
       "https://res.cloudinary.com/kowmnsjp/video/upload/v1795330088/From_Klickpin.com-_Bright_home_ideas_that_bring_color_comfort_and_meaning_for_modern_homes_that_feel_easy_to_keep_up-pin-id-1105422671074843629.mp4",
       "https://res.cloudinary.com/kowmnsjp/video/upload/v1795330115/From_Klickpin.com-_Bright_home_ideas_that_bring_color_comfort_and_meaning_for_modern_homes_that_feel_easy_to_keep_up-pin-id-1144195849120031932.mp4",
-      "https://res.cloudinary.com/kowmnsjp/video/upload/v1795330142/From_Klickpin.com-_Bright_home_ideas_that_bring_color_comfort_and_meaning_fo
+      "https://res.cloudinary.com/kowmnsjp/video/upload/v1795330142/From_Klickpin.com-_Bright_home_ideas_that_bring_color_comfort_and_meaning_for_modern_homes_that_feel_easy_to_keep_up-pin-id-1144195849118447484.mp4",
+      "https://res.cloudinary.com/kowmnsjp/video/upload/v1795330166/From_Klickpin.com-_Bright_home_ideas_that_bring_color_comfort_and_meaning_for_modern_homes_that_feel_easy_to_keep_up-pin-id-1144195849120056288.mp4",
+      "https://res.cloudinary.com/kowmnsjp/video/upload/v1795330195/From_Klickpin.com-_Bright_home_ideas_that_bring_color_comfort_and_meaning_for_modern_homes_that_feel_easy_to_keep_up-pin-id-1144195849120056412.mp4",
+      "https://res.cloudinary.com/kowmnsjp/video/upload/v1795330221/From_Klickpin.com-_Bright_home_ideas_that_bring_color_comfort_and_meaning_for_modern_homes_that_feel_easy_to_keep_up-pin-id-1083889835366037195.mp4",
+      "https://res.cloudinary.com/kowmnsjp/video/upload/v1795330246/From_Klickpin.com-_14_Trending_Minimalist_Home_Styling_for_This_Year-pin-id-1046312925947600908.mp4",
+      "https://res.cloudinary.com/kowmnsjp/video/upload/v1795330274/From_Klickpin.com-_14_Trending_Minimalist_Home_Styling_for_This_Year-pin-id-738660776429077368.mp4",
+      "https://res.cloudinary.com/kowmnsjp/video/upload/v1795330295/From_Klickpin.com-_14_Trending_Minimalist_Home_Styling_for_This_Year-pin-id-799107527676674977.mp4",
+      "https://res.cloudinary.com/kowmnsjp/video/upload/v1795330315/From_Klickpin.com-_14_Trending_Minimalist_Home_Styling_for_This_Year-pin-id-940900547175096572_1.mp4",
+      "https://res.cloudinary.com/kowmnsjp/video/upload/v1795330342/From_Klickpin.com-_14_Trending_Minimalist_Home_Styling_for_This_Year-pin-id-799107527677006545.mp4",
+      "https://res.cloudinary.com/kowmnsjp/video/upload/v1795330380/From_Klickpin.com-_14_Trending_Minimalist_Home_Styling_for_This_Year-pin-id-1025202302700041533.mp4",
+      "https://res.cloudinary.com/kowmnsjp/video/upload/v1795330409/From_Klickpin.com-_14_Trending_Minimalist_Home_Styling_for_This_Year-pin-id-926404585871731125.mp4",
+      "https://res.cloudinary.com/kowmnsjp/video/upload/v1795330433/From_Klickpin.com-_14_Trending_Minimalist_Home_Styling_for_This_Year-pin-id-1119989001113145318.mp4",
+      "https://res.cloudinary.com/kowmnsjp/video/upload/v1795330489/From_Klickpin.com-_14_Trending_Minimalist_Home_Styling_for_This_Year-pin-id-1114289132851118988.mp4",
+      "https://res.cloudinary.com/kowmnsjp/video/upload/v1795330518/From_Klickpin.com-_14_Trending_Minimalist_Home_Styling_for_This_Year-pin-id-940900547175096565.mp4",
+      "https://res.cloudinary.com/kowmnsjp/video/upload/v1795330543/From_Klickpin.com-_14_Trending_Minimalist_Home_Styling_for_This_Year-pin-id-940900547175096567.mp4",
+      "https://res.cloudinary.com/kowmnsjp/video/upload/v1795330571/From_Klickpin.com-_14_Trending_Minimalist_Home_Styling_for_This_Year-pin-id-940900547175096571.mp4",
+      "https://res.cloudinary.com/kowmnsjp/video/upload/v1795330603/From_Klickpin.com-_Need_fresh_inspiration_Pin_these_budget-friendly_craft_project_ideas_youll_want_to_recreate_this_weekend_for_a_polished_look_th.mp4",
+      "https://res.cloudinary.com/kowmnsjp/video/upload/v1795330630/From_Klickpin.com-_53_Stunning_Spa_Night_Ideas-pin-id-799107527676671273.mp4",
+      "https://res.cloudinary.com/kowmnsjp/video/upload/v1795330664/From_Klickpin.com-_Need_fresh_inspiration_Bookmark_these_simple_pet-friendly_home_ideas_that_look_high-end_but_stay_practical_designed_to_feel_ins.mp4",
+      "https://res.cloudinary.com/kowmnsjp/video/upload/v1795330702/From_Klickpin.com-_Explore_Simple_tiny_apartment_decor_that_help_you_create_a_beautiful_result_without_overspending_for_ideas_worth_saving_right_n.mp4",
+      "https://res.cloudinary.com/kowmnsjp/video/upload/v1795330729/From_Klickpin.com-_Collect_these_20_Dreamy_summer_outfit_inspiration_that_instantly_upgrade_your_space_style_or_celebration_without_much_effort_fo.mp4"
+    ];
+
+    var grid = document.getElementById('videoGrid');
+    for (var idx = 0; idx < videoList.length; idx++) {
+      var url = videoList[idx];
+      var num = (idx + 1 < 10 ? "0" : "") + (idx + 1);
+      var dlUrl = url.replace('/video/upload/', '/video/upload/fl_attachment/');
+      var card = document.createElement('div');
+      card.className = 'video-card';
+      card.innerHTML = '<video controls playsinline preload="none"><source src="' + url + '" type="video/mp4"></video><div class="video-title">CreatorBox Reel #' + num + '</div><a class="dl-btn" href="' + dlUrl + '" download="CreatorBox_Reel_' + num + '.mp4">⬇️ ডাউনলোড করুন</a>';
+      grid.appendChild(card);
+    }
+
+    function openTab(id, btn) {
+      var secs = document.querySelectorAll('.section');
+      var btns = document.querySelectorAll('.tab-btn');
+      for (var i = 0; i < secs.length; i++) secs[i].classList.remove('active');
+      for (var j = 0; j < btns.length; j++) btns[j].classList.remove('active');
+      document.getElementById(id).classList.add('active');
+      btn.classList.add('active');
+    }
+
+    function copyText(elementId, btn) {
+      var text = document.getElementById(elementId).innerText;
+      navigator.clipboard.writeText(text);
+      var old = btn.innerText;
+      btn.innerText = "✅ কপি হয়েছে!";
+      setTimeout(function() { btn.innerText = old; }, 1500);
+    }
+  </script>
+</body>
+</html>
